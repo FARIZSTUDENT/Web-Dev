@@ -64,6 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
       <input type="submit" value="Daftar">
     </form>
+    <p>Sudah punya akun? <a href="login.php">Login Sekarang</a></p>
+    <p><a href="index.php">Kembali ke Beranda</a></p>
   </div>
 </body>
 </html>
