@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db.php';
+include 'db.php'; // pastikan file db.php sudah ada dan konek ke MySQL
 
 $pesan = '';
 $username = '';
@@ -20,26 +20,80 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     strlen($password) < 8 ||
     !preg_match('/[a-z]/', $password) ||
     !preg_match('/[A-Z]/', $password) ||
-    !preg_match('/[\W]/', $password) // simbol
+    !preg_match('/[\W]/', $password)
   ) {
-    $pesan = "Password harus minimal 8 karakter, ada huruf kecil, huruf besar, dan simbol.";
+    $pesan = "Password harus memenuhi syarat berikut:<br>
+    1. Minimal 8 karakter<br>
+    2. Mengandung huruf kecil (a–z)<br>
+    3. Mengandung huruf besar (A–Z)<br>
+    4. Mengandung simbol (misalnya: ! @ # \$ % ^ & *)";
   }
   else {
     mysqli_query($conn, "INSERT INTO users(username, password) VALUES('$username','$password')");
-    echo "Registrasi berhasil. <a href='login.php'>Login sekarang</a>";
+    echo "<p>Registrasi berhasil. <a href='login.php'>Login sekarang</a></p>";
     exit;
   }
 }
 ?>
 
-<h2>Registrasi</h2>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registrasi</title>
+  <!-- <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: auto;
+      padding-top: 50px;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0 10px 0;
+      box-sizing: border-box;
+    }
+    .error {
+      color: red;
+      margin-bottom: 10px;
+    }
+    .rules {
+      font-size: 14px;
+      background: #f0f0f0;
+      padding: 10px;
+      border-left: 4px solid orange;
+      margin-top: -8px;
+      margin-bottom: 10px;
+    }
+  </style> -->
+</head>
+<body>
 
-<?php if ($pesan): ?>
-  <p style="color: red;"><?= $pesan ?></p>
-<?php endif; ?>
+  <h2>Registrasi Siswa</h2>
 
-<form method="post">
-  Username: <input name="username" value="<?= htmlspecialchars($username) ?>" required><br>
-  Password: <input type="password" name="password" required><br>
-  <button type="submit">Daftar</button>
-</form>
+  <?php if ($pesan): ?>
+    <div class="error"><?= $pesan ?></div>
+  <?php endif; ?>
+
+  <form method="post">
+    <label>Username:</label>
+    <input name="username" value="<?= htmlspecialchars($username) ?>" required>
+
+    <label>Password:</label>
+    <input type="password" name="password" required>
+
+    <div class="rules">
+      Password harus:
+      <ul>
+        <li>1. Minimal 8 karakter</li>
+        <li>2. Ada huruf kecil (a–z)</li>
+        <li>3. Ada huruf besar (A–Z)</li>
+        <li>4. Ada simbol (misalnya: ! @ # $ % ^ & *)</li>
+      </ul>
+    </div>
+
+    <button type="submit">Daftar</button>
+  </form>
+
+</body>
+</html>
