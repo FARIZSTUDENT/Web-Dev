@@ -40,32 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html>
 <head>
   <title>Registrasi</title>
-  <!-- <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 500px;
-      margin: auto;
-      padding-top: 50px;
-    }
-    input[type="text"], input[type="password"] {
-      width: 100%;
-      padding: 8px;
-      margin: 5px 0 10px 0;
-      box-sizing: border-box;
-    }
-    .error {
-      color: red;
-      margin-bottom: 10px;
-    }
-    .rules {
-      font-size: 14px;
-      background: #f0f0f0;
-      padding: 10px;
-      border-left: 4px solid orange;
-      margin-top: -8px;
-      margin-bottom: 10px;
-    }
-  </style> -->
 </head>
 <body>
 
